@@ -10,7 +10,12 @@ func TestSum(t *testing.T) {
 	}{
 		{"empty", []int{}, 0},
 		{"single", []int{5}, 5},
-		{"multiple", []int{1, 2, 3}, 6},
+		{"positives", []int{1, 2, 3}, 6},
+		{"negatives", []int{-1, -2, -3}, -6},
+		{"mixed_sign", []int{5, -3, 2, -1}, 3},
+		{"all_zeros", []int{0, 0, 0}, 0},
+		{"single_zero", []int{0}, 0},
+		{"large_values", []int{1000000, 2000000}, 3000000},
 	}
 
 	for _, tt := range tests {
@@ -30,8 +35,14 @@ func TestMax(t *testing.T) {
 		ok   bool
 	}{
 		{"empty", []int{}, 0, false},
-		{"single", []int{5}, 5, true},
-		{"multiple", []int{1, 5, 3}, 5, true},
+		{"single_positive", []int{5}, 5, true},
+		{"single_negative", []int{-3}, -3, true},
+		{"positives", []int{1, 5, 3}, 5, true},
+		{"negatives", []int{-5, -1, -3}, -1, true},
+		{"mixed", []int{-5, 2, -3, 8, 1}, 8, true},
+		{"duplicates", []int{5, 3, 5}, 5, true},
+		{"all_zeros", []int{0, 0, 0}, 0, true},
+		{"single_zero", []int{0}, 0, true},
 	}
 
 	for _, tt := range tests {
