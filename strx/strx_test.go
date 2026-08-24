@@ -10,6 +10,12 @@ func TestReverse(t *testing.T) {
 	}{
 		{"ascii", "hello", "olleh"},
 		{"cjk", "日本", "本日"},
+		{"cjk_longer", "日本語", "語本日"},
+		{"emoji", "😀😁", "😁😀"},
+		{"mixed_script", "hello世界", "界世olleh"},
+		{"empty", "", ""},
+		{"single_char", "a", "a"},
+		{"single_rune_cjk", "本", "本"},
 	}
 
 	for _, tt := range tests {
@@ -28,7 +34,13 @@ func TestUpper(t *testing.T) {
 		want string
 	}{
 		{"ascii", "hello", "HELLO"},
-		{"accented", "café", "CAFÉ"},
+		{"accents/cafe", "café", "CAFÉ"},
+		{"accents/naive", "naïve", "NAÏVE"},
+		{"already_upper", "HELLO", "HELLO"},
+		{"mixed_case", "HeLLo", "HELLO"},
+		{"empty", "", ""},
+		{"single_char", "a", "A"},
+		{"single_accent", "é", "É"},
 	}
 
 	for _, tt := range tests {
